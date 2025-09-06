@@ -1,7 +1,9 @@
 {
     "name": "Quality.Editor",
     "rootNamespace": "Quality.Editor",
-    "references": [],
+    "references": [
+        "Quality.Core"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

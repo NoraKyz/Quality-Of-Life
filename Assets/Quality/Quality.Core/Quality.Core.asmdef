@@ -3,7 +3,8 @@
     "rootNamespace": "Quality.Core",
     "references": [
         "ACTk.Runtime",
-        "UniTask"
+        "UniTask",
+        "PrimeTween.Installer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
