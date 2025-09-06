@@ -1,0 +1,17 @@
+{
+    "name": "Quality.Core",
+    "rootNamespace": "Quality.Core",
+    "references": [
+        "ACTk.Runtime",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
