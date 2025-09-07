@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.annulusgames.alchemy": {
+      "version": "https://github.com/annulusgames/Alchemy.git?path=/Alchemy/Assets/Alchemy",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d9f5a2b8f9b7e79ac7fc7eb188b607bd60910398"
+    },
+    "com.cysharp.r3": {
+      "version": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "hash": "5acafe712e14d65ebb8e746a040ffe53cd1f4d39"
+    },
     "com.cysharp.unitask": {
       "version": "2.5.10",
       "depth": 0,

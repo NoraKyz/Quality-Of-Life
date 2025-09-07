@@ -844,12 +844,6 @@ namespace VInspector
 
         static Dictionary<int, Rect> fieldRects_byLastControlId = new();
 
-
-
-
-
-
-
         public VInspectorEditor(System.Func<SerializedProperty> rootPropertyGetter, System.Func<IEnumerable<object>> targetsGetter)
         {
             this.rootPropertyGetter = rootPropertyGetter;

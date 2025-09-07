@@ -4,7 +4,9 @@
     "references": [
         "ACTk.Runtime",
         "UniTask",
-        "PrimeTween.Installer"
+        "PrimeTween.Installer",
+        "R3.Unity",
+        "Alchemy"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

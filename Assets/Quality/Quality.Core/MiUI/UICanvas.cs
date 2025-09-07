@@ -3,14 +3,15 @@ using UnityEngine;
 
 namespace Quality.Core.MiUI
 {
+    
+    
     [RequireComponent(typeof(Canvas), typeof(CanvasGroup))]
     public abstract class UICanvas : MonoBehaviour
     {
         [SerializeField, SelfFill] protected Canvas      canvas;
         [SerializeField, SelfFill] protected CanvasGroup canvasGroup;
-
-        [SerializeField] private Animator _animator;
-
+        
+        
         // public bool CanBack { get; private set; }
         // public IReadOnlyUIData Data { get; private set; }
         //
