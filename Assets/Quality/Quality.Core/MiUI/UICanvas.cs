@@ -1,6 +1,6 @@
-﻿using PrimeTween;
-using Quality.Core.CustomAttribute;
+﻿using Quality.Core.CustomAttribute;
 using UnityEngine;
+using UnityEngine.Playables;
 using VInspector;
 
 namespace Quality.Core.MiUI
@@ -10,25 +10,28 @@ namespace Quality.Core.MiUI
     {
         private const string UI_LAYER_NAME = "UI";
 
-        [Tab("References")]
-        [SerializeField, SelfFill] protected Canvas      canvas;
-        [SerializeField, SelfFill] protected CanvasGroup canvasGroup;
+        [Tab("References")] 
+        [SerializeField, SelfFill] protected Canvas           canvas;
+        [SerializeField, SelfFill] protected CanvasGroup      canvasGroup;
+        [SerializeField, SelfFill] protected PlayableDirector _playableDirector;
 
         [Tab("Settings")]
-        [SerializeField] protected int   _sortingOrder      = 0;
-        [SerializeField] protected bool  _useDefaultOpening = true;
-        [SerializeField] protected float _openLockDuration;
-
-        [SerializeField, ShowIf("_openLockDuration")]
-        protected float _openDuration;
-
-        [SerializeField] protected bool _useDefaultClosing = true;
-
-        [SerializeField, ShowIf("_useDefaultClosing")]
-        protected float _closeDuration;
-
-        [SerializeField] protected float _closeLockDuration;
-
+        [SerializeField] protected int           _sortingOrder      = 0;
+        [SerializeField] protected BgType        _bgType            = BgType.NONE;
+        [SerializeField] protected PlayableAsset _openTimeline;
+        [SerializeField] protected float         _openLockDuration;
+        [SerializeField] protected PlayableAsset _closeTimeline;
+        [SerializeField] protected float         _closeLockDuration;
+        
+        public BgType BgType => _bgType;
+        public float OpenLockDuration => _openLockDuration;
+        public float CloseLockDuration => _closeLockDuration;
+        
+        public virtual void Init()
+        {
+            
+        }
+        
         public virtual void Open()
         {
             transform.SetAsLastSibling();
@@ -37,22 +40,17 @@ namespace Quality.Core.MiUI
             canvas.overrideSorting  = true;
             canvas.sortingLayerName = UI_LAYER_NAME;
             canvas.sortingOrder     = _sortingOrder;
-
-            if (_useDefaultClosing)
-            {
-                canvasGroup.alpha = 0f;
-                Tween.Alpha(canvasGroup, 1f, _openDuration, Ease.OutCubic);
-            }
+            
+            _playableDirector.playableAsset = _openTimeline;
+            _playableDirector.Play();
         }
 
         public virtual void Close()
         {
-            if (_useDefaultClosing)
-            {
-                Tween.Alpha(canvasGroup, 0f, _closeDuration, Ease.InCubic);
-            }
+            _playableDirector.playableAsset = _closeTimeline;
+            _playableDirector.Play();
         }
-        
+
         public virtual void CloseDirectly()
         {
             gameObject.SetActive(false);

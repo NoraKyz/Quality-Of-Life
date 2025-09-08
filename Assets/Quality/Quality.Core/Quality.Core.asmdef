@@ -6,7 +6,8 @@
         "UniTask",
         "R3.Unity",
         "VInspector",
-        "PrimeTween.Runtime"
+        "PrimeTween.Runtime",
+        "Unity.Addressables"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
