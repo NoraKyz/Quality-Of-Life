@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.annulusgames.alchemy": {
-      "version": "https://github.com/annulusgames/Alchemy.git?path=/Alchemy/Assets/Alchemy",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "d9f5a2b8f9b7e79ac7fc7eb188b607bd60910398"
-    },
     "com.cysharp.r3": {
       "version": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
       "depth": 0,
@@ -100,6 +93,12 @@
       "dependencies": {
         "com.google.firebase.auth": "12.10.1"
       }
+    },
+    "com.kyrylokuzyk.primetween": {
+      "version": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.singularitygroup.hotreload": {
       "version": "file:com.singularitygroup.hotreload",

@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.annulusgames.alchemy": "https://github.com/annulusgames/Alchemy.git?path=/Alchemy/Assets/Alchemy",
     "com.cysharp.r3": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
     "com.cysharp.unitask": "2.5.10",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
@@ -12,6 +11,7 @@
     "com.google.firebase.messaging": "file:com.google.firebase.messaging-12.10.1.tgz",
     "com.google.firebase.remote-config": "file:com.google.firebase.remote-config-12.10.1.tgz",
     "com.google.firebase.storage": "file:com.google.firebase.storage-12.10.1.tgz",
+    "com.kyrylokuzyk.primetween": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
     "com.unity.addressables": "2.7.2",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.ide.rider": "3.0.36",
