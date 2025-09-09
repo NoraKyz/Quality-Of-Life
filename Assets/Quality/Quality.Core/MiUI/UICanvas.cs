@@ -16,7 +16,7 @@ namespace Quality.Core.MiUI
         [SerializeField, SelfFill] protected PlayableDirector _playableDirector;
 
         [Tab("Settings")]
-        [SerializeField] protected int           _sortingOrder      = 0;
+        [SerializeField] protected int           _sortingOrder;
         [SerializeField] protected BgType        _bgType            = BgType.NONE;
         [SerializeField] protected PlayableAsset _openTimeline;
         [SerializeField] protected float         _openLockDuration;

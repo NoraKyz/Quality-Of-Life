@@ -7,30 +7,37 @@ using VInspector;
 namespace Quality.Core.MiUI
 {
     [Serializable]
-    public class RefData
+    public class UIRefData
     {
-        [SerializeField, ReadOnly] private string         typeName;
-        [SerializeField, ReadOnly] private AssetReference assetReference;
+        [SerializeField]           private bool           _isPreload;
+        [SerializeField, ReadOnly] private string         _typeName;
+        [SerializeField, ReadOnly] private AssetReference _assetReference;
+
+        public bool IsPreload
+        {
+            get => _isPreload;
+            internal set => _isPreload = value;
+        }
 
         public string NameType
         {
-            get => typeName;
-            set => typeName = value;
+            get => _typeName;
+            internal set => _typeName = value;
         }
 
         public AssetReference AssetReference
         {
-            get => assetReference;
-            set => assetReference = value;
+            get => _assetReference;
+            internal set => _assetReference = value;
         }
     }
 
     public class UIAssetRefSO : ScriptableObject
     {
-        [SerializeField] private string        _targetFolder;
-        [SerializeField] private List<RefData> _refs = new List<RefData>();
+        [SerializeField] private string          _targetFolder;
+        [SerializeField] private List<UIRefData> _refs = new List<UIRefData>();
 
-        public IReadOnlyList<RefData> Refs => _refs;
+        public IReadOnlyList<UIRefData> Refs => _refs;
 
 #if UNITY_EDITOR
 
@@ -56,7 +63,7 @@ namespace Quality.Core.MiUI
                 }
 
                 var typeName = uiPanel.GetType().Name;
-                _refs.Add(new RefData { NameType = typeName, AssetReference = new AssetReference(guid) });
+                _refs.Add(new UIRefData { NameType = typeName, AssetReference = new AssetReference(guid) });
             }
         }
 
