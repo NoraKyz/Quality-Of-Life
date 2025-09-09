@@ -4,13 +4,14 @@ using Cysharp.Threading.Tasks;
 using Quality.Core.Logger;
 using Quality.Core.ServiceLocator;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Quality.Core.RemoteConfig
 {
     public class RemoteConfigService : ServiceBase
     {
-        [SerializeField] private RemoteConfigKey _remoteConfigKey;
-        [SerializeField] private RemoteConfigData _remoteConfigData;
+        [FormerlySerializedAs("_remotePrimitiveKey")] [FormerlySerializedAs("_remoteConfigKey")] [SerializeField]                                             private RemotePrimitiveKeySO     _remotePrimitiveKeySO;
+        [FormerlySerializedAs("_remoteConfigData")] [SerializeField] private RemotePrimitiveData _remotePrimitiveData;
 
 
         private LocalProvider _localProvider;
@@ -18,12 +19,12 @@ namespace Quality.Core.RemoteConfig
 
         private CancellationTokenSource _cst;
 
-        public IReadOnlyRemoteConfigData Config => _remoteConfigData;
+        public IReadOnlyRemoteConfigData Primitive => _remotePrimitiveData;
 
         private void Reset()
         {
-            _remoteConfigKey = Resources.Load<RemoteConfigKey>("so-remote-config-key");
-            _remoteConfigData = Resources.Load<RemoteConfigData>("so-remote-config-data");
+            _remotePrimitiveKeySO = Resources.Load<RemotePrimitiveKeySO>("so-remote-config-key");
+            _remotePrimitiveData = Resources.Load<RemotePrimitiveData>("so-remote-config-data");
         }
 
         public async UniTask InitializeAsync()
@@ -31,7 +32,7 @@ namespace Quality.Core.RemoteConfig
             _localProvider = new LocalProvider();
             _firebaseProvider = new FirebaseProvider();
 
-            _localProvider.Load(_remoteConfigData);
+            _localProvider.Load(_remotePrimitiveData);
 
             FetchFirebaseConfig().Forget();
 
@@ -43,9 +44,9 @@ namespace Quality.Core.RemoteConfig
         {
             try
             {
-                await _firebaseProvider.FetchDataAsync(_remoteConfigKey.ConfigKeys, _remoteConfigData);
+                await _firebaseProvider.OverwritePrimitiveData(_remotePrimitiveKeySO.ConfigKeys, _remotePrimitiveData);
 
-                _localProvider.Save(_remoteConfigData);
+                _localProvider.Save(_remotePrimitiveData);
                 this.Log("Fetch and save remote config success.");
             }
             catch (Exception e)

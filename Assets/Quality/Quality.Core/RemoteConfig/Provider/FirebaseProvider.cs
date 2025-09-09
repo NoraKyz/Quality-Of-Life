@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
 using Newtonsoft.Json;
@@ -10,18 +11,49 @@ namespace Quality.Core.RemoteConfig
 {
     public class FirebaseProvider
     {
-        private const string CONFIG_KEY = "remote_config";
-
-        public async UniTask FetchDataAsync(IReadOnlyList<string> keysToFetch, RemoteConfigData data)
+        public async UniTask FetchDataAsync()
         {
-            await FirebaseRemoteConfig.DefaultInstance.FetchAsync();
+            await FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero);
             await FirebaseRemoteConfig.DefaultInstance.ActivateAsync();
+            
+            this.Log($"FetchDataAsync Success {FirebaseRemoteConfig.DefaultInstance.AllValues.Count}");
+        }
+        
+        public void OverwriteGroupData(string key, RemoteGroupData groupData)
+        {
+            var json = FirebaseRemoteConfig.DefaultInstance.GetValue(key).StringValue;
 
-            var configDictionary = GetValuesAsDictionary(keysToFetch);
+            if (string.IsNullOrEmpty(json))
+            {
+                this.LogWarning($"Key '{key}' not found or empty in Remote Config. Using existing local value.");
+                return;
+            }
 
-            this.Log($"Fetched {configDictionary.Count.ToString()} keys from Firebase.");
+            try
+            {
+                JsonConvert.PopulateObject(json, groupData);
+            }
+            catch (JsonException ex)
+            {
+                this.LogError($"Failed to deserialize key '{key}'. Exception: {ex}. Using existing local value.");
+            }
+        }
 
-            var json = JsonConvert.SerializeObject(configDictionary, Formatting.Indented);
+        public void OverwritePrimitiveData(IReadOnlyList<string> keysToFetch, RemotePrimitiveData data)
+        {
+            var configDictionary = GetPrimitiveDataAsDictionary(keysToFetch);
+            
+            var json = string.Empty;
+            
+            try
+            {
+                json = JsonConvert.SerializeObject(configDictionary, Formatting.Indented);
+            }
+            catch (JsonException ex)
+            {
+                this.LogError($"Serializing PrimitiveData to JSON: {ex.Message}");
+                return;
+            }
 
             try
             {
@@ -33,20 +65,20 @@ namespace Quality.Core.RemoteConfig
             }
         }
 
-        private Dictionary<string, object> GetValuesAsDictionary(IReadOnlyList<string> keysToFetch)
+        private Dictionary<string, object> GetPrimitiveDataAsDictionary(IReadOnlyList<string> keysToFetch)
         {
             var configDictionary = new Dictionary<string, object>();
 
             foreach (var key in keysToFetch)
             {
                 ConfigValue value = FirebaseRemoteConfig.DefaultInstance.GetValue(key);
-                configDictionary[key] = GetValueAsObject(value);
+                configDictionary[key] = GetConfigValueAsObject(value);
             }
 
             return configDictionary;
         }
 
-        private object GetValueAsObject(ConfigValue configValue)
+        private object GetConfigValueAsObject(ConfigValue configValue)
         {
             try
             {
