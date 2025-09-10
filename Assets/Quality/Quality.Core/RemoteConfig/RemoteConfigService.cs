@@ -4,32 +4,31 @@ using Cysharp.Threading.Tasks;
 using Quality.Core.Logger;
 using Quality.Core.ServiceLocator;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Quality.Core.RemoteConfig
 {
     public class RemoteConfigService : ServiceBase
     {
-        [FormerlySerializedAs("_remotePrimitiveKey")] [FormerlySerializedAs("_remoteConfigKey")] [SerializeField]                                             private RemotePrimitiveKeySO     _remotePrimitiveKeySO;
-        [FormerlySerializedAs("_remoteConfigData")] [SerializeField] private RemotePrimitiveData _remotePrimitiveData;
+        [SerializeField] private RemotePrimitiveData      _remotePrimitiveData;
+        [SerializeField] private RemotePrimitiveKeySO     _remotePrimitiveKeySO;
+        [SerializeField] private RemoteGroupDefaultDataSO _remoteGroupDefaultDataSO;
 
-
-        private LocalProvider _localProvider;
+        private LocalProvider    _localProvider;
         private FirebaseProvider _firebaseProvider;
 
         private CancellationTokenSource _cst;
 
-        public IReadOnlyRemoteConfigData Primitive => _remotePrimitiveData;
+        private RemotePrimitiveData _remotePrimitiveData;
 
         private void Reset()
         {
             _remotePrimitiveKeySO = Resources.Load<RemotePrimitiveKeySO>("so-remote-config-key");
-            _remotePrimitiveData = Resources.Load<RemotePrimitiveData>("so-remote-config-data");
+            _remotePrimitiveData  = Resources.Load<RemotePrimitiveData>("so-remote-config-data");
         }
 
         public async UniTask InitializeAsync()
         {
-            _localProvider = new LocalProvider();
+            _localProvider    = new LocalProvider();
             _firebaseProvider = new FirebaseProvider();
 
             _localProvider.Load(_remotePrimitiveData);
