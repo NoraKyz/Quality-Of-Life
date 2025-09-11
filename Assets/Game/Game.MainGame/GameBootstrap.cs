@@ -21,7 +21,7 @@ namespace Game.MainGame
 
         private async UniTask InitializeAsync()
         {
-            await Services.Get<RemoteConfigService>().InitializeAsync();
+            await ServicesProvider.Get<RemoteConfigService>().InitializeAsync();
         }
     }
 }

@@ -7,7 +7,8 @@
         "R3.Unity",
         "VInspector",
         "PrimeTween.Runtime",
-        "Unity.Addressables"
+        "Unity.Addressables",
+        "Unity.Notifications.Unified"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

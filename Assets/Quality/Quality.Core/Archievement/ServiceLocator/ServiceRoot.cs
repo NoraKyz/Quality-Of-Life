@@ -10,7 +10,7 @@ namespace Quality.Core.ServiceLocator
             DontDestroyOnLoad(gameObject);
             
             var services = GetComponentsInChildren<ServiceBase>(true);
-            Services.Preload(services);
+            ServicesProvider.Preload(services);
         }
     }
 }

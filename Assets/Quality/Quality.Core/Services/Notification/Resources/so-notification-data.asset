@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24625b3cab8e44eb88317d6d2b6ec690, type: 3}
+  m_Name: so-notification-data
+  m_EditorClassIdentifier: 
+  data:
+  - title: Truth or Dare
+    message: "Ready for a quick challenge? \U0001F3AF"
+    fireAfterHours: 0.1
+  - title: Play Truth or Dare now!
+    message: "Spin the bottle and see what's next! \U0001F37E"
+    fireAfterHours: 24
+  - title: Back to Truth or Dare!
+    message: "Your friends are waiting for your dare \U0001F604"
+    fireAfterHours: 72
+  - title: Jump into Truth or Dare!
+    message: "New dares & wild questions inside \U0001F60D"
+    fireAfterHours: 120
+  - title: Truth or Dare is heating up!
+    message: "You're so close to the next hilarious moment \U0001F602"
+    fireAfterHours: 168
+  - title: Truth or Dare is calling!
+    message: "It's your turn to reveal the truth or take the dare \U0001F525"
+    fireAfterHours: 336
+  - title: Rejoin Truth or Dare now!
+    message: "New spicy challenges just dropped \U0001F336\uFE0F"
+    fireAfterHours: 504
+  - title: Open Truth or Dare again!
+    message: "Let's see if you're brave enough this time \U0001F4AA"
+    fireAfterHours: 672

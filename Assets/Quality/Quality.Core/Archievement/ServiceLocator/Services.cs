@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Quality.Core.ServiceLocator
 {
-    public static class Services
+    public static class ServicesProvider
     {
         private static Dictionary<Type, ServiceBase> s_services = new();
 

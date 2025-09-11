@@ -11,7 +11,7 @@ namespace Quality.Core.EventBus
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Init()
         {
-            s_eventBus = new EventBus<IEvent>();
+            Dispose();
         }
 
 #endif
@@ -34,6 +34,12 @@ namespace Quality.Core.EventBus
         public static void UnsubcribeFrom(EventBus<IEvent>.EventHandler<IEvent> handler)
         {
             s_eventBus.UnsubscribeFrom(handler);
+        }
+
+        public static void Dispose()
+        {
+            s_eventBus.Dispose();
+            s_eventBus = new EventBus<IEvent>();
         }
     }
 }
