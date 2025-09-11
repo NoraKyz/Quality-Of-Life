@@ -1,12 +1,19 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using VInspector;
 
 namespace Quality.Core.RemoteConfig
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class RemotePrimitiveData : ScriptableObject
     {
         // define your remote config data structure here
+
+        private void Awake()
+        {
+            hideFlags = HideFlags.DontUnloadUnusedAsset;
+        }
     }
     
     public class RemotePrimitiveKeySO : ScriptableObject

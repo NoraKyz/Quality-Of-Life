@@ -25,7 +25,7 @@ namespace Quality.Core.RemoteConfig
 
             if (string.IsNullOrEmpty(json))
             {
-                this.LogWarning($"Key '{key}' not found or empty in Remote Config. Using existing local value.");
+                this.LogWarning($"Key '{key}' not found or empty in Firebase Remote. Using existing local value.");
                 return;
             }
 
