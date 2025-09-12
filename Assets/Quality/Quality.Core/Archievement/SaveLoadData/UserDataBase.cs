@@ -1,22 +1,19 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Quality.Core.Logger;
+using UnityEngine;
+using VInspector;
 
 namespace Quality.Core.SaveLoadData
 {
-    [Serializable]
-    public abstract class UserDataBase
+    [JsonObject(MemberSerialization.Fields)]
+    public abstract class UserDataBase : ScriptableObject
     {
-        private string _dataKey;
+        public abstract string Key { get; }
 
-        [JsonIgnore]
-        public string DataKey
+        [Button]
+        public void LogData()
         {
-            get => _dataKey ??= GetType().Name;
-        }
-
-        public virtual void InitPresentData()
-        {
-
+            this.LogWarning(JsonConvert.SerializeObject(this));
         }
     }
 }

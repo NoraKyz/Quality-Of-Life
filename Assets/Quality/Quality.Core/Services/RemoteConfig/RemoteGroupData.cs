@@ -9,11 +9,6 @@ namespace Quality.Core.RemoteConfig
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class RemoteGroupData : ScriptableObject
     {
-        private void Awake()
-        {
-            hideFlags = HideFlags.DontUnloadUnusedAsset;
-        }
-
         [Button]
         public void LogData()
         {

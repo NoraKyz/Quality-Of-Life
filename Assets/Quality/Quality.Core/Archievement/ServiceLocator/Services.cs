@@ -12,20 +12,12 @@ namespace Quality.Core.ServiceLocator
 #if UNITY_EDITOR
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Init()
+        private static void ResetOnDontLoadDomain()
         {
             s_services.Clear();
         }
 
 #endif
-
-        internal static void Preload(ServiceBase[] services)
-        {
-            foreach (var service in services)
-            {
-                Register(service);
-            }
-        }
 
         public static T Get<T>() where T : ServiceBase
         {
@@ -39,6 +31,14 @@ namespace Quality.Core.ServiceLocator
             MyLogger.LogError($"Service of type {type} is not registered.");
 
             return null;
+        }
+        
+        internal static void Preload(ServiceBase[] services)
+        {
+            foreach (var service in services)
+            {
+                Register(service);
+            }
         }
 
         private static void Register<T>(T service) where T : ServiceBase

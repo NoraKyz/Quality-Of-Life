@@ -9,7 +9,7 @@ namespace Quality.Core.EventBus
 #if UNITY_EDITOR
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Init()
+        private static void ResetOnDontLoadDomain()
         {
             Dispose();
         }

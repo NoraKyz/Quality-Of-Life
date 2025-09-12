@@ -6,6 +6,8 @@ namespace Core.Modules.Services.Notification
     [CreateAssetMenu(fileName = "so-notification-data", menuName = "SO/Services/Notification/Notification Data")]
     public class NofiticationDataSO : ScriptableObject
     {
-        public List<NotificationData> data = new List<NotificationData>();
+        [SerializeField] private List<NotificationData> _notifications = new();
+        
+        public IReadOnlyList<NotificationData> Notifications => _notifications;
     }
 }
