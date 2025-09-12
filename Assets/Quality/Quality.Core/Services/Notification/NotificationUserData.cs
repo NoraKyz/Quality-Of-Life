@@ -1,30 +1,23 @@
-﻿// using Core.Modules.Architecture.SaveLoadData;
-// using Newtonsoft.Json;
-// using R3;
-//
-// namespace Core.Modules.Services.Notification
-// {
-//     internal class NotificationUserData : UserDataBase
-//     {
-//         public              bool                   isNotification;
-//         [JsonIgnore] public ReactiveProperty<bool> isNotificationPresent;
-//
-//         public NotificationUserData()
-//         {
-//             isNotification        = true;
-//             isNotificationPresent = new ReactiveProperty<bool>(isNotification);
-//         }
-//
-//         public override void InitPresentData()
-//         {
-//             isNotificationPresent = new ReactiveProperty<bool>(isNotification);
-//         }
-//
-//         public void SetNotification(bool isNotification)
-//         {
-//             this.isNotification         = isNotification;
-//             isNotificationPresent.Value = isNotification;
-//             DataManager.Save<NotificationUserData>();
-//         }
-//     }
-// }
+﻿using Quality.Core.SaveLoadData;
+using UnityEngine;
+
+namespace Quality.Core.Notification
+{
+    public class NotificationUserData : UserDataBase
+    {
+        [SerializeField] private bool isNotification = true;
+        
+        public override string Key => UserDataKey.NOTIFICATION;
+        public bool IsNotification => isNotification;
+        
+        public void SetNotification(bool isNotification, bool isSave = true)
+        {
+            this.isNotification = isNotification;
+            
+            if (isSave)
+            {
+                DataManager.Save<NotificationUserData>();
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@ using VInspector;
 
 namespace Quality.Core.SaveLoadData
 {
-    [JsonObject(MemberSerialization.Fields)]
+    // [JsonObject(MemberSerialization.OptIn)]
     public abstract class UserDataBase : ScriptableObject
     {
         public abstract string Key { get; }
