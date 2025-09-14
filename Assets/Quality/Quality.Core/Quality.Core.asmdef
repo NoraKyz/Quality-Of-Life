@@ -8,7 +8,10 @@
         "VInspector",
         "PrimeTween.Runtime",
         "Unity.Addressables",
-        "Unity.Notifications.Unified"
+        "Unity.Notifications.Unified",
+        "Most_HapticFeedback",
+        "UniTask.Addressables",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

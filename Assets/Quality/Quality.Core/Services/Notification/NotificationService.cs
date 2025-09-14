@@ -10,13 +10,38 @@ namespace Quality.Core.Notification
 {
     public class NotificationService : ServiceBase
     {
-        [SerializeField] private NofiticationDataSO _notificationDataSO;
+        [SerializeField] private NotificationUserData _notificationUserData;
+        [SerializeField] private NofiticationDataSO   _notificationDataSO;
 
         private bool _isAvailable;
-        private NotificationUserData _notificationUserData;
 
-        public bool IsNotification => _notificationUserData.IsNotification;
-        private NotificationUserData NotificationData => _notificationUserData ??= DataManager.Get<NotificationUserData>();
+        public bool IsNotification
+        {
+            get => NotificationData.IsNotification;
+            set => NotificationData.SetNotification(value);
+        }
+
+        private NotificationUserData NotificationData =>
+            _notificationUserData ??= DataManager.Get<NotificationUserData>();
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if ((_isAvailable && IsNotification) == false)
+            {
+                return;
+            }
+
+            if (hasFocus)
+            {
+                this.Log($"CancelAllNotifications");
+                CancelAllNotifications();
+            }
+            else
+            {
+                this.Log($"ScheduleAllNotifications");
+                ScheduleAllNotifications();
+            }
+        }
 
         public void Initialize()
         {
@@ -43,26 +68,7 @@ namespace Quality.Core.Notification
             _isAvailable = request.Status == NotificationsPermissionStatus.Granted;
         }
 
-        private void OnApplicationFocus(bool hasFocus)
-        {
-            if ((_isAvailable && IsNotification) == false)
-            {
-                return;
-            }
-
-            if (hasFocus)
-            {
-                this.Log($"CancelAllNotifications");
-                CancelAllNotifications();
-            }
-            else
-            {
-                this.Log($"ScheduleAllNotifications");
-                ScheduleAllNotifications();
-            }
-        }
-
-        public void ScheduleAllNotifications()
+        private void ScheduleAllNotifications()
         {
             CancelAllNotifications();
 
@@ -80,11 +86,7 @@ namespace Quality.Core.Notification
 
         private void SendNotification(NotificationData data)
         {
-            var notification = new Unity.Notifications.Notification
-            {
-                Title       = data.Title,
-                Text        = data.Message,
-            };
+            var notification = new Unity.Notifications.Notification { Title = data.Title, Text = data.Message, };
 
             var fireTime = DateTime.Now.AddHours(data.FireAfterHours);
 

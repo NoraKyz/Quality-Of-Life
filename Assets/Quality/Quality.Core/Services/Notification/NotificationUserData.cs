@@ -1,23 +1,20 @@
-﻿using Quality.Core.SaveLoadData;
+﻿using System;
+using Quality.Core.SaveLoadData;
 using UnityEngine;
 
 namespace Quality.Core.Notification
 {
-    public class NotificationUserData : UserDataBase
+    [Serializable]
+    internal class NotificationUserData : UserDataBase
     {
-        [SerializeField] private bool isNotification = true;
-        
+        [SerializeField] private bool _isNotification = true;
+
         public override string Key => UserDataKey.NOTIFICATION;
-        public bool IsNotification => isNotification;
+        public bool IsNotification => _isNotification;
         
-        public void SetNotification(bool isNotification, bool isSave = true)
+        public void SetNotification(bool isNotification)
         {
-            this.isNotification = isNotification;
-            
-            if (isSave)
-            {
-                DataManager.Save<NotificationUserData>();
-            }
+            _isNotification = isNotification;
         }
     }
 }

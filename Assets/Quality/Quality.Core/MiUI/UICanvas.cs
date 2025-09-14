@@ -10,29 +10,24 @@ namespace Quality.Core.MiUI
     {
         private const string UI_LAYER_NAME = "UI";
 
-        [Tab("References")] 
+        [Tab("References")]
         [SerializeField, SelfFill] protected Canvas           canvas;
         [SerializeField, SelfFill] protected CanvasGroup      canvasGroup;
         [SerializeField, SelfFill] protected PlayableDirector _playableDirector;
 
         [Tab("Settings")]
         [SerializeField] protected int           _sortingOrder;
-        [SerializeField] protected BgType        _bgType            = BgType.NONE;
+        [SerializeField] protected BgType        _bgType = BgType.NONE;
         [SerializeField] protected PlayableAsset _openTimeline;
         [SerializeField] protected float         _openLockDuration;
         [SerializeField] protected PlayableAsset _closeTimeline;
         [SerializeField] protected float         _closeLockDuration;
-        
+
         public BgType BgType => _bgType;
         public float OpenLockDuration => _openLockDuration;
         public float CloseLockDuration => _closeLockDuration;
-        
-        public virtual void Init()
-        {
-            
-        }
-        
-        public virtual void Open()
+
+        public virtual void Setup()
         {
             transform.SetAsLastSibling();
             gameObject.SetActive(true);
@@ -40,7 +35,10 @@ namespace Quality.Core.MiUI
             canvas.overrideSorting  = true;
             canvas.sortingLayerName = UI_LAYER_NAME;
             canvas.sortingOrder     = _sortingOrder;
-            
+        }
+
+        public virtual void Open()
+        {
             _playableDirector.playableAsset = _openTimeline;
             _playableDirector.Play();
         }

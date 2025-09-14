@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Quality.Core.Logger;
 using UnityEngine;
 using VInspector;
@@ -14,12 +13,5 @@ namespace Quality.Core.RemoteConfig
         {
             this.LogWarning(JsonConvert.SerializeObject(this));
         }
-    }
-    
-    public sealed class RemoteGroupDefaultDataSO : ScriptableObject
-    {
-        [SerializeField] private SerializedDictionary<string, RemoteGroupData> _data = new();
-        
-        public IReadOnlyDictionary<string, RemoteGroupData> Data => _data;
     }
 }

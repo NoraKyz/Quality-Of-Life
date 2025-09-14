@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24625b3cab8e44eb88317d6d2b6ec690, type: 3}
-  m_Name: so-notification-data
+  m_Script: {fileID: 11500000, guid: cca9238301b741ebb298def2ec2ab93b, type: 3}
+  m_Name: so-remote-primitive-data
   m_EditorClassIdentifier: 
-  _notifications: []
